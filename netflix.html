@@ -90,20 +90,7 @@ function showAdblockPopup() {
     document.getElementById('adb').style.display = 'flex';
 }
 
-function baitElementCheck() {
-    return new Promise((resolve) => {
-        const bait = document.createElement('div');
-        bait.className = 'adsbox ad-banner';
-        bait.style.cssText = 'width:1px;height:1px;position:absolute;left:-9999px;top:-9999px;';
-        document.body.appendChild(bait);
 
-        setTimeout(() => {
-            const blocked = window.getComputedStyle(bait).display === 'none' || bait.offsetHeight === 0;
-            bait.remove();
-            resolve(blocked);
-        }, 100); // Wait briefly to give adblocker time to act
-    });
-}
 
 //function googleAdsScriptCheck() {
     //return new Promise((resolve) => {
