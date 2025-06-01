@@ -2,6 +2,7 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iframe With Telegram Prompt</title>
   <style>
     html, body {
@@ -9,12 +10,22 @@
       padding: 0;
       height: 100%;
       background-color: black;
+      overflow: hidden;
     }
 
     iframe {
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       border: none;
+      display: block;
+    }
+
+    .traffic-counter {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
     }
   </style>
   <script>
@@ -25,7 +36,12 @@
 </head>
 <body>
   <iframe src="https://userr3536.ifrem.net/iframe/frame.php"></iframe>
-<center><script type="text/javascript" src="https://cdn.livetrafficfeed.com/static/online/live.v2.js?text=ffffff&bg=e61c1c&ro=0&tz=America%2FNew_York"></script><noscript id="LTF_online_website"><a href="http://livetrafficfeed.com/online-counter">Online Counter</a></noscript>
-  
+
+  <div class="traffic-counter">
+    <script type="text/javascript" src="https://cdn.livetrafficfeed.com/static/online/live.v2.js?text=ffffff&bg=e61c1c&ro=0&tz=America%2FNew_York"></script>
+    <noscript id="LTF_online_website">
+      <a href="http://livetrafficfeed.com/online-counter">Online Counter</a>
+    </noscript>
+  </div>
 </body>
 </html>
