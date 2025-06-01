@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Live Stream Player</title>
+  <title>Live Stream Player with Popup & Online Counter</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <script src="https://content.jwplatform.com/libraries/IDzF9Zmk.js"></script>
   <style>
     body {
@@ -12,6 +13,7 @@
       background: #000;
       color: #fff;
       font-family: Arial, sans-serif;
+      overflow-x: hidden;
     }
 
     #player-container {
@@ -40,32 +42,77 @@
       border: none;
     }
 
-    .bottom-image-container {
+    /* Popup styles */
+    .popup {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .popup-content {
+      background: #111;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 400px;
       text-align: center;
-      margin: 20px 0;
+      box-shadow: 0 0 15px #00afff;
+    }
+
+    .popup-content .logo img {
+      width: 100px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    .popup-content h2 {
+      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 18px;
+      color: #00afff;
+    }
+
+    .join-button {
+      display: inline-block;
+      background: #0088cc;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .join-button i {
+      margin-right: 8px;
+    }
+
+    .already-joined {
+      display: inline-block;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 6px;
+      background: #444;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .already-joined:hover {
+      background: #666;
+    }
+
+    /* Online counter center style */
+    center {
+      margin: 15px 0;
       z-index: 1000;
       position: relative;
     }
 
-    .bottom-image-container a {
-      display: inline-block;
-      font-size: 16px;
-      font-weight: 500;
-      text-align: center;
-      border-radius: 8px;
-      padding: 5px 10px;
-      background: #389ce9;
-      text-decoration: none;
-      color: #fff;
-      max-width: 320px;
-    }
-
-    .bottom-image-container svg {
-      width: 30px;
-      height: 50px;
-      vertical-align: middle;
-      margin: 0 5px 0 0;
-    }
   </style>
 </head>
 <body>
@@ -81,11 +128,21 @@
 
   <div id="player-container"></div>
 
-  
-<a style='display:block;font-size:16px;font-weight:500;text-align:center;border-radius:8px;padding:5px;background:#389ce9;text-decoration:none;color:#fff;' href='https://t.me/bdixtv_official' target='_blank'><svg style='width:30px;height:50px;vertical-align:middle;margin:0px 5px;' viewBox='0 0 21 18'><g fill='none'><path fill='#ffffff' d='M0.554,7.092 L19.117,0.078 C19.737,-0.156 20.429,0.156 20.663,0.776 C20.745,0.994 20.763,1.23 20.713,1.457 L17.513,16.059 C17.351,16.799 16.62,17.268 15.88,17.105 C15.696,17.065 15.523,16.987 15.37,16.877 L8.997,12.271 C8.614,11.994 8.527,11.458 8.805,11.074 C8.835,11.033 8.869,10.994 8.905,10.958 L15.458,4.661 C15.594,4.53 15.598,4.313 15.467,4.176 C15.354,4.059 15.174,4.037 15.036,4.125 L6.104,9.795 C5.575,10.131 4.922,10.207 4.329,10.002 L0.577,8.704 C0.13,8.55 -0.107,8.061 0.047,7.614 C0.131,7.374 0.316,7.182 0.554,7.092 Z'></path></g></svg>JOIN US ON TELEGRAM</a>
-    </a>
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <div class="logo">
+        <img src="https://maxplay-tv.fun/prox.jpg" alt="Logo" />
+      </div>
+      <h2>To access this website, please join our official Telegram channel.</h2>
+      <a href="https://t.me/live_cricket_24" target="_blank" class="join-button">
+        <i class="fab fa-telegram"></i> Join Telegram Channel
+      </a>
+      <button id="alreadyJoined" class="already-joined">Already Joined</button>
+    </div>
   </div>
 
+  <!-- Online Counter -->
   <center>
     <script type="text/javascript" src="https://cdn.livetrafficfeed.com/static/online/live.v2.js?text=ffffff&bg=e61c1c&ro=0&tz=America%2FNew_York"></script>
     <noscript id="LTF_online_website">
@@ -106,8 +163,7 @@
       image: "https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png",
       logo: {
         file: "https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png",
-        position: "top-right",
-        link: "https://t.me/bdixtv_official"
+        position: "top-right"
       }
     });
 
@@ -116,6 +172,12 @@
       player.load([{ file: selectedURL }]);
       player.play(true);
     }
+
+    // Popup handling
+    document.getElementById('alreadyJoined').addEventListener('click', function() {
+      // Hide popup when user clicks "Already Joined"
+      document.getElementById('popup').style.display = 'none';
+    });
   </script>
 
 </body>
