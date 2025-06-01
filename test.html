@@ -1,184 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>BDIXTV LIVE SPORTS LINK</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <script src="https://content.jwplatform.com/libraries/IDzF9Zmk.js"></script>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
-    }
 
-    #player-container {
-      width: 100%;
-      height: 100vh;
-      max-height: 100%;
-      position: relative;
-      z-index: 0;
-    }
 
-    .control-bar {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.7);
-      padding: 10px;
-      border-radius: 6px;
-      z-index: 1000;
-    }
-
-    select {
-      padding: 6px 10px;
-      font-size: 14px;
-      color: #000;
-      border-radius: 4px;
-      border: none;
-    }
-
-    /* Popup styles */
-    .popup {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-
-    .popup-content {
-      background: #111;
-      padding: 30px;
-      border-radius: 10px;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 0 15px #00afff;
-    }
-
-    .popup-content .logo img {
-      width: 100px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-    }
-
-    .popup-content h2 {
-      margin-bottom: 20px;
-      font-weight: 500;
-      font-size: 18px;
-      color: #00afff;
-    }
-
-    .join-button {
-      display: inline-block;
-      background: #0088cc;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      margin-bottom: 15px;
-    }
-
-    .join-button i {
-      margin-right: 8px;
-    }
-
-    .already-joined {
-      display: inline-block;
-      padding: 8px 20px;
-      border: none;
-      border-radius: 6px;
-      background: #444;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .already-joined:hover {
-      background: #666;
-    }
-
-    /* Online counter center style */
-    center {
-      margin: 15px 0;
-      z-index: 1000;
-      position: relative;
-    }
-
-  </style>
+<title>bokul Sports</title>
+ <link rel="stylesheet" type="text/css" href="https://cdn247.xyz/jw.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://cdn.jwplayer.com/libraries/IDzF9Zmk.js"></script>
+<script src="https://ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
+<script>jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo";</script>
+<script src="https://content.jwplatform.com/libraries/IDzF9Zmk.js"></script></script>
+</script>
 </head>
 <body>
-
-  <div class="control-bar">
-    <select id="videoSelect" onchange="changeStream()">
-      <option value="https://live-test.tsports.com/live-02/index.m3u8" selected>T Sports (Live)</option>
-      <option value="https://hotstarlive.vercel.app/IPL/ENG.m3u8">Hotstar ENG</option>
-      <option value="http://38.96.178.201/live/TSports/tracks-v1a1/mono.m3u8">T Sports (Alt)</option>
-      <option value="https://tv.bdixtv24.com/toffee/live.php?id=9b4b3941986a&e=.m3u8">BDIX Toffee</option>
-    </select>
-  </div>
-
-  <div id="player-container"></div>
-
-  <!-- Popup -->
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <div class="logo">
-      <img src="" alt="Logo" />
-      </div>
-      <h2>To access this website, please join our official Telegram channel.</h2>
-      <a href="https://t.me/bdixtv_official" target="_blank" class="join-button">
-        <i class="fab fa-telegram"></i> Join Telegram Channel
-      </a>
-      <button id="alreadyJoined" class="already-joined">Already Joined</button>
-    </div>
-  </div>
-
-  <!-- Online Counter -->
-  <center>
-    <script type="text/javascript" src="https://cdn.livetrafficfeed.com/static/online/live.v2.js?text=ffffff&bg=e61c1c&ro=0&tz=America%2FNew_York"></script>
-    <noscript id="LTF_online_website">
-      <a href="http://livetrafficfeed.com/online-counter" style="color:#fff;">Online Counter</a>
-    </noscript>
-  </center>
-
-  <script>
-    var player = jwplayer("player-container");
-    player.setup({
-      file: "https://live-test.tsports.com/live-02/index.m3u8",
-      width: "100%",
-      height: "100%",
+<div id="myElement"></div>
+  <script type="text/javascript">
+    jwplayer("myElement").setup({
+      width: '100%',
+      height:'100%',
+      autostart: "true",
+      fullscreen: true,
+      controls: true,
+      pipIcon: "enabled",
+      volume: "100",
+      preload: "auto",
+      file : "https://stream2.aryzap.com/v1/018a8885b8951eb401a603639363/018a88860ada09831f17035d95dd/main.m3u8",
+      aspectratio: "16:9",
+      stretching: "exactfit",
+      aboutlink: "/#",
+      logo: {"file":"Logo","margin":"15px", "position":"top-right","link":"#"},
+      captions: {color: '#ffb800',fontSize: 30,backgroundOpacity: 0},
       type: "hls",
-      autostart: true,
-      mute: false,
       primary: "html5",
-      image: "https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png",
-      logo: {
-        file: "https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png",
-        position: "top-right"
-      }
-    });
-
-    function changeStream() {
-      var selectedURL = document.getElementById("videoSelect").value;
-      player.load([{ file: selectedURL }]);
-      player.play(true);
-    }
-
-    // Popup handling
-    document.getElementById('alreadyJoined').addEventListener('click', function() {
-      // Hide popup when user clicks "Already Joined"
-      document.getElementById('popup').style.display = 'none';
-    });
+      hlshtml: true,
+    })
   </script>
+</div>
 
-</body>
-</html>
+<script>
+setTimeout(videovisible, 3000)
+
+function videovisible() {
+    document.getElementById('loading').style.display = 'none'
+}
+document.addEventListener("DOMContentLoaded", () => {
+    const e = document.querySelector("video"),
+        n = e.getElementsByTagName("source")[0].src,
+        o = {};
+    if (Hls.isSupported()) {
+        var config = {
+            maxMaxBufferLength: 100,
+        };
+        const t = new Hls(config);
+        t.loadSource(n), t.on(Hls.Events.MANIFEST_PARSED, function(n, l) {
+            const s = t.levels.map(e => e.height);
+            o.quality = {
+                default: s[0],
+                options: s,
+                forced: !0,
+                onChange: e => (function(e) {
+                    window.hls.levels.forEach((n, o) => {
+                        n.height === e && (window.hls.currentLevel = o)
+                    })
+                })(e)
+            };
+            new Plyr(e, o)
+        }), t.attachMedia(e), window.hls = t
+    } else {
+        new Plyr(e, o)
+    }
+});
+</script>
