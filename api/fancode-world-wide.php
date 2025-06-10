@@ -32,7 +32,7 @@ $response = preg_replace('/#EXTINF:-1.*?@bdixtv_official.*?\nhttps?:\/\/.*?\.m3u
 // Modify each .m3u8 link to go through your stream.php proxy and add Referer
 $response = preg_replace_callback('/(https?:\/\/[^\s]+?\.m3u8)(?!\|Referer)/', function($matches) {
     $originalLink = $matches[1];
-    return "https://allinonereborn.com/fc/stream_proxy.php?url=" . $originalLink . "";
+    return "https://allinonereborn.com/fcw/stream_proxy.php?url=" . $originalLink . "";
 }, $response);
 
 // Prepend the custom channel at the very top of the playlist
