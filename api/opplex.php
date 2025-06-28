@@ -1,43 +1,48 @@
 <?php
 
-include 'config.php';
-header("Cache-Control: max-age=84000, public");
-header('Content-Type: audio/x-mpegurl');
-header('Content-Disposition: attachment; filename="' . $genreName . '/playlist.m3u"');
+// Main playlist URL
+$url = "https://super.footcric.xyz/Toffeelive/kaya_app.php?route=getIPTVList";
 
-$channels = getAllChannelInfo();
-$serverPublicIP = getServerPublicIP();
+// Custom channel line (should always appear at the top)
+$customLine = <<<EOD
+#EXTINF:-1 tvg-logo="https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png" group-title="𝗝𝗢𝗜𝗡 𝗢𝗨𝗥 𝗧𝗘𝗟𝗘𝗚𝗥𝗔𝗠", @bdixtv_official
+https://bdixtv.short.gy/bdixtv_official
 
-$inus_data = '#EXTM3U x-tvg-url="https://www.tsepg.cf/epg.xml.gz"' . PHP_EOL . PHP_EOL;
+EOD;
 
-foreach ($channels as $entry) {
+// Fetch the playlist using cURL with Referer header
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Referer: https://tv-shihab.xyz/'
+]);
 
-    $id = $entry['id'] ?? 'unknown';
-    $name = $entry['channel_name'] ?? 'Unknown';
-    $genre = $entry['channel_genre'][0] ?? 'Unknown';
-    $logo = $entry['channel_logo'] ?? '';
-    
-    $mpd = isset($entry['streamData']['initialUrl']) ? $entry['streamData']['initialUrl'] : '';
-    $extension = pathinfo($mpd, PATHINFO_EXTENSION);
-    $license_key_url = "https://cdn.babel-in.xyz/tpck/index.php?id=$id";
+$response = curl_exec($ch);
 
-    // Generate playlist entry
-    $inus_data .= '#EXTINF:-1 tvg-id="' . $id . '" tvg-logo="' . $logo . '" group-title="' . $genre . '", ' . $name . PHP_EOL;
-    $inus_data .= '#KODIPROP:inputstream=inputstream.adaptive' . PHP_EOL;
-    $inus_data .= '#KODIPROP:inputstreamaddon=inputstream.adaptive' . PHP_EOL;
-    $inus_data .= '#KODIPROP:inputstream.adaptive.manifest_type=' . $extension . PHP_EOL;
-    $inus_data .= '#KODIPROP:inputstream.adaptive.license_type=clearkey' . PHP_EOL;
-    $inus_data .= '#KODIPROP:inputstream.adaptive.license_key=' . $license_key_url . PHP_EOL;
-
-    // Append URL based on extension
-    if ($extension === 'm3u8' && $mpd !== '') {
-        $inus_data .= $mpd . PHP_EOL . PHP_EOL;
-    } else {
-        $mpd_url = "https://$serverAddress/$id.$extension";
-        if ($mpd_url !== '') {
-            $inus_data .= $mpd_url . "|X-Forwarded-For=$serverPublicIP" . PHP_EOL . PHP_EOL;
-        }
-    }
+if (curl_errno($ch)) {
+    curl_close($ch);
+    die('cURL Error: ' . curl_error($ch));
 }
 
-echo $inus_data;
+curl_close($ch);
+
+// Remove any existing instance of the custom channel if already present
+$response = preg_replace('/#EXTINF:-1.*?@bdixtv_official.*?\nhttps?:\/\/.*?\.m3u8.*?\n?/s', '', $response);
+
+// Modify each .m3u8 link to go through your stream.php proxy and add Referer
+$response = preg_replace_callback('/(https?:\/\/[^\s]+?\.m3u8)(?!\|Referer)/', function($matches) {
+    $originalLink = $matches[1];
+    return "https://play.shihab.fun/in/stream.php?url=" . $originalLink . "|Referer=https://play.shihab.fun/";
+}, $response);
+
+// Prepend the custom channel at the very top of the playlist
+$finalPlaylist = $customLine . "\n" . ltrim($response);
+
+// Output the playlist with correct header
+header("Content-Type: audio/x-mpegurl");
+echo $finalPlaylist;
+
+?>
