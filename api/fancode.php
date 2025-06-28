@@ -1,7 +1,7 @@
 <?php
 
 // Main playlist URL
-$url = "https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.m3u";
+$url = "https://super.footcric.xyz/Toffeelive/kaya_app.php?route=getIPTVList";
 
 // Custom channel line (should always appear at the top)
 $customLine = <<<EOD
