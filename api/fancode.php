@@ -1,11 +1,11 @@
 <?php
 
 // Main playlist URL
-$url = "https://super.footcric.xyz/Toffeelive/kaya_app.php?route=getIPTVList";
+$url = "https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.m3u";
 
 // Custom channel line (should always appear at the top)
 $customLine = <<<EOD
-#EXTINF:-1 tvg-logo="https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png" group-title="𝗝𝗢𝗜𝗡 𝗢𝗨𝗥 𝗧𝗘𝗟𝗘𝗚𝗥𝗔𝗠", @bdixtv_official
+#EXTINF:-1 tvg-logo="https://i.ibb.co.com/5gVjqSh0/Red-Abstract-Live-Stream-Free-Logo-20250309-192127-0002.png" group-title="  ", @bdixtv_official
 https://bdixtv.short.gy/bdixtv_official
 
 EOD;
@@ -32,7 +32,7 @@ $response = preg_replace('/#EXTINF:-1.*?@bdixtv_official.*?\nhttps?:\/\/.*?\.m3u
 // Modify each .m3u8 link to go through your stream.php proxy and add Referer
 $response = preg_replace_callback('/(https?:\/\/[^\s]+?\.m3u8)(?!\|Referer)/', function($matches) {
     $originalLink = $matches[1];
-    return "https://play.shihab.fun/in/stream.php?url=" . $originalLink . "|Referer=https://play.shihab.fun/";
+    return "https://allinonereborn.fun/fcw/stream_proxy.php?url=" . $originalLink . "";
 }, $response);
 
 // Prepend the custom channel at the very top of the playlist
