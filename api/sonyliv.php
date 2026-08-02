@@ -4,7 +4,7 @@
 
 // Main playlist URL
 
-$url = "https://play.yuvraj.news/extra/sliv-live-event.php";
+$url = "https://raw.githubusercontent.com/incognitobrothers/AynaOTT-Auto-Update-Playlist/refs/heads/main/ayna_live.m3u";
 
 
 
