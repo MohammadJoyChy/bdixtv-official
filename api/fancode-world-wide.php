@@ -1,7 +1,7 @@
 <?php
 
 // Main playlist URL
-$url = "https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.m3u";
+$url = "https://raw.githubusercontent.com/incognitobrothers/AynaOTT-Auto-Update-Playlist/refs/heads/main/ayna_live.m3u";
 
 // Custom channel line (should always appear at the top)
 $customLine = <<<EOD
